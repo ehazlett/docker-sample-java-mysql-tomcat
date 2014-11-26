@@ -1,0 +1,25 @@
+db:
+  image: orchardup/mysql
+  environment:
+    MYSQL_USER: java
+    MYSQL_PASSWORD: java
+    MYSQL_DATABASE: javatest
+  ports:
+    - "3306"
+
+dbinit:
+  image: orchardup/mysql
+  entrypoint: /bin/bash
+  volumes:
+    - .:/host
+  command: -c "sleep 4; mysql -u java --password=java -h mysql javatest < /host/init.sql; exit 0"
+  links:
+    - db:mysql
+
+app:
+  build: .
+  links:
+    - dbinit
+    - db:mysql
+  ports:
+    - "8080"
