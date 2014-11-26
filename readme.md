@@ -1,5 +1,5 @@
 # Docker Java/MySQL Tomcat Sample
-This is a simple Java application that shows Java and MySQL.
+This is a simple Java application with MySQL.
 
 # Run
 
